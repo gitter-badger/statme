@@ -15,3 +15,8 @@ end
 client.update_with_media("I'm tweeting with @gem!", File.new("/path/to/media.png"))
 
 end
+
+=begin
+potential classes of use are Twitter:Mention and Twitter:Reply
+repo for twitter gem is here https://github.com/sferik/twitter
+=end
