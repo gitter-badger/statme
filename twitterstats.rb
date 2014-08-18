@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'twitter'
+# require 'sinatra'
 
 # TwitterStats
 begin
@@ -12,11 +13,35 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ""
 end
 
-client.update_with_media("I'm tweeting with @gem!", File.new("/path/to/media.png"))
+=begin
+get '/update' do
+  update
+  puts 'updated'
+end
+
+@last = 480737441985212416
+def update
+  update_last = true
+  CLIENT.search('" guardiancrime " -rt', since_id: @last, result_type: "recent").take(5).collect do |tweet|
+    if update_last
+      @last = tweet.id
+      update_last = false
+    end
+    reply = "@#{tweet.user.screen_name} hello!"
+    puts "posting #{reply}" if reply.size <= 140
+    CLIENT.update(reply, in_reply_to_status: tweet) if reply.size <= 140
+    sleep 120
+  end
+end
+=end
+
+client.update("I'm tweeting with @gem!")
 
 end
 
 =begin
 potential classes of use are Twitter:Mention and Twitter:Reply
 repo for twitter gem is here https://github.com/sferik/twitter
+twitter api is dev.twitter.com
 =end
+
