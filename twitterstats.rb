@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'twitter'
 # require 'sinatra'
+# require 'chatterbox/dsl'
 
 # TwitterStats
 begin
@@ -14,6 +15,9 @@ client = Twitter::REST::Client.new do |config|
 end
 
 =begin
+
+this is what i found originally https://github.com/miguelgraz/TwitterBot
+
 get '/update' do
   update
   puts 'updated'
@@ -35,12 +39,20 @@ def update
 end
 =end
 
+=begin
+
+this one uses chatterbox... a little simpler https://github.com/muffinista/chatterbot
+
+replies do |tweet|
+  reply "#USER# Thanks for contacting me!", tweet
+end
+=end
+
 client.update("I'm tweeting with @gem!")
 
 end
 
 =begin
-potential classes of use are Twitter:Mention and Twitter:Reply
 repo for twitter gem is here https://github.com/sferik/twitter
 twitter api is dev.twitter.com
 =end
