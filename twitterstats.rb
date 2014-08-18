@@ -3,6 +3,7 @@ require 'twitter'
 
 # TwitterStats
 begin
+
 # Configuration
 client = Twitter::REST::Client.new do |config|
   config.consumer_key = ""
@@ -11,6 +12,6 @@ client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ""
 end
 
-client.update("Up and running! @dillonbordeleau")
-puts "Tweet sent!"
+client.update_with_media("I'm tweeting with @gem!", File.new("/path/to/media.png"))
+
 end
