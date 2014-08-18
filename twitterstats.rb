@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'twitter'
+# require 'tweetstream'
 # require 'sinatra'
 # require 'chatterbox/dsl'
 
@@ -12,6 +13,10 @@ client = Twitter::REST::Client.new do |config|
   config.consumer_secret = ""
   config.access_token = ""
   config.access_token_secret = ""
+end
+
+client.update("I'm tweeting with @gem!")
+
 end
 
 =begin
@@ -38,7 +43,6 @@ def update
   end
 end
 =end
-
 =begin
 
 this one uses chatterbox... a little simpler https://github.com/muffinista/chatterbot
@@ -47,13 +51,7 @@ replies do |tweet|
   reply "#USER# Thanks for contacting me!", tweet
 end
 =end
-
-client.update("I'm tweeting with @gem!")
-
-end
-
 =begin
 repo for twitter gem is here https://github.com/sferik/twitter
 twitter api is dev.twitter.com
 =end
-
