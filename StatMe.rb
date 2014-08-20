@@ -1,3 +1,5 @@
+Dir.chdir("/file/location")
+
 require 'rubygems'
 require 'twitter'
 
@@ -14,6 +16,10 @@ begin
     puts "@#{tweet.user.screen_name}: #{tweet.text}"
     if tweet.place.full_name?
       puts tweet.place.full_name
+        if File.file?("location.txt")
+          File.delete("location.txt")
+        end
+          File.open("location.txt", 'w+') {|f| f.write(tweet.place.full_name.to_s) }
     end
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = ""
