@@ -1,4 +1,4 @@
-Dir.chdir("/file/location")
+Dir.chdir("/path/to/directory")
 
 require 'rubygems'
 require 'twitter'
@@ -28,7 +28,7 @@ begin
       config.access_token_secret = ""
     end 
     if tweet.place.full_name?
-      client.update("@#{tweet.user.screen_name} hello!")
+      client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/media.jpeg"), :place_id => "7b93be1d864cedbb")
       puts "Threat neutralized."
       puts "Scanning..."
     else
