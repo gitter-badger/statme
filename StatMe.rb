@@ -21,7 +21,7 @@ begin
       config.access_token = ""
       config.access_token_secret = ""
     end 
-    if tweet.geo?
+    if tweet.place.full_name?
       client.update("@#{tweet.user.screen_name} hello!")
       puts "Threat neutralized."
       puts "Scanning..."
