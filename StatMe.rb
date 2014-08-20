@@ -11,18 +11,22 @@ begin
   end
   puts "Scanning..."
   client.filter(:track => "guardiancrime statme") do |tweet|
-    if tweet.geo
-      lat = tweet.geo.coordinates[0]
-      long = tweet.geo.coordinates[1]
-      puts "@#{tweet.user.screen_name} #{lat}, #{long}: #{tweet.text}"
-      client = Twitter::REST::Client.new do |config|
-        config.consumer_key = ""
-        config.consumer_secret = ""
-        config.access_token = ""
-        config.access_token_secret = ""
-      end 
+    puts "@#{tweet.user.screen_name}: #{tweet.text}"
+    if tweet.place.full_name?
+      puts tweet.place.full_name
+    end
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = ""
+      config.consumer_secret = ""
+      config.access_token = ""
+      config.access_token_secret = ""
+    end 
+    if tweet.geo?
       client.update("@#{tweet.user.screen_name} hello!")
       puts "Threat neutralized."
+      puts "Scanning..."
+    else
+      puts "No location provided by user."
       puts "Scanning..."
     end
   end
