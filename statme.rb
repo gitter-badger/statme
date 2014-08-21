@@ -20,6 +20,7 @@ begin
           File.delete("location.txt")
         end
           File.open("location.txt", 'w+') {|f| f.write(tweet.place.full_name.to_s) }
+          File.open("location.jpg", 'w+')
     end
     client = Twitter::REST::Client.new do |config|
       config.consumer_key = ""
@@ -28,7 +29,9 @@ begin
       config.access_token_secret = ""
     end 
     if tweet.place.full_name?
-      client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/media.jpeg"), :place_id => "7b93be1d864cedbb")
+      sleep 10
+      client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
+      File.delete("location.jpg")
       puts "Threat neutralized."
       puts "Scanning..."
     else
