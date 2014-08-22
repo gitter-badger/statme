@@ -22,12 +22,12 @@ begin
           File.open("location.txt", 'w+') {|f| f.write(tweet.place.full_name.to_s) }
           File.open("new.jpg", 'w+')
     end
-    client = Twitter::REST::Client.new do |config|
+    client = Twitter::REST::Client.new do |config| 
       config.consumer_key = ""
       config.consumer_secret = ""
       config.access_token = ""
       config.access_token_secret = ""
-    end 
+    end
     if tweet.place.full_name?
       puts "Waiting for image generation."
       while File.file?("ready.jpg") == false
@@ -40,9 +40,9 @@ begin
         File.delete("error.txt")
       else
         puts "Image generated successfully."
-        client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
+        #client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
       end  
-      File.delete("location.jpg", "ready.jpg")
+      File.delete("location.txt", "ready.jpg")
       puts "Response sent."
       puts "Scanning..."
     else
