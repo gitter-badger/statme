@@ -31,10 +31,16 @@ begin
     if tweet.place.full_name?
       puts "Waiting for image generation."
       while File.file?("ready.jpg") == false
-        sleep(1)
+        sleep 1
       end
-      puts "Image generated successfully."
-      client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
+      if File.file?("error.txt") == false
+        puts "Image generated successfully."
+        client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
+      else
+        puts "Error with image generation."
+        client.update("@#{tweet.user.screen_name} we're sorry, but we don't have any data for your location.)
+        File.delete("error.txt")
+      end  
       File.delete("location.jpg", "ready.jpg")
       puts "Threat neutralized."
       puts "Scanning..."
