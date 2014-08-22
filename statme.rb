@@ -40,7 +40,7 @@ begin
         File.delete("error.txt")
       else
         puts "Image generated successfully."
-        #client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
+        client.update_with_media("@#{tweet.user.screen_name}", File.new("/path/to/directory/location.jpg"), :place_id => "7b93be1d864cedbb")
       end  
       File.delete("location.txt", "ready.jpg")
       puts "Response sent."
