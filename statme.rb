@@ -36,7 +36,7 @@ begin
       sleep 2 #safety buffer
       if File.file?("error.txt") == true
         puts "Error with image generation."
-        client.update("@#{tweet.user.screen_name} we're sorry, but we don't have any data for your location.)
+        client.update("@#{tweet.user.screen_name} we're sorry, but we don't have any data for your location.")
         File.delete("error.txt")
       else
         puts "Image generated successfully."
