@@ -67,10 +67,10 @@ states = {
     'WY': 'WYOMING'
 }
 
-consumer_key = 'TWPsNBca4joN3o3bF5GP8X52J'
-consumer_secret = 'k1O9YO267OsDedaErkhR1MTIxJS9FjgIPCnhtcsM0o4IVEnQk0'
-access_key = '2199777559-0cnOjV5oBtGl57FIWrtpNI5THdrRjyS9f9O9pQV'
-access_secret = 'hSs76D1kxjepVUuXoy0WinWisUyYdXifEbqNkd7IKCJZ2'
+consumer_key = ''
+consumer_secret = ''
+access_key = ''
+access_secret = ''
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_key, access_secret)
@@ -85,8 +85,7 @@ class DBConnector():
     def findcrimerate(self, city, state):
         cur = self.connection.cursor()
         cur.execute('SELECT crime_activity FROM CrimeData.' + self.year + ' WHERE state = ' + '\'' + states[state] + '\'' + ' AND city = ' + '\'' + city + '\'')
-        print "Crime: %s" % cur.fetchone()
-        cur.close()
+        return "Crime Rate: %s / 10" % cur.fetchone()
 
 
 class HashtagListener(tweepy.StreamListener):
@@ -107,7 +106,8 @@ class HashtagListener(tweepy.StreamListener):
                     return
                 # print self.location[0]
                 # print self.location[1].strip(' ')
-                self.mysqldb.findcrimerate(self.location[0], self.location[1].strip(' '))
+                self.reply(self.mysqldb.findcrimerate(self.location[0], self.location[1].strip(' ')), status.id)
+
     def on_error(self, status_code):
         print >> sys.stderr, 'Encountered Error with status code:', status_code
         return True
@@ -116,6 +116,8 @@ class HashtagListener(tweepy.StreamListener):
         print >> sys.stderr, 'Timeout...'
         return True
 
+    def reply(self, message, user):
+        api.update_status('@' + user + message, user)
 
 def main():
     mysql_db = DBConnector('localhost', 2012)
