@@ -27,10 +27,10 @@ UNEXPECTED_ERROR = ' Sorry, we encountered and unexpected error. Please tweet @N
 
 
 #twitter keys
-consumer_key = 'TWPsNBca4joN3o3bF5GP8X52J'
-consumer_secret = 'k1O9YO267OsDedaErkhR1MTIxJS9FjgIPCnhtcsM0o4IVEnQk0'
-access_key = '2199777559-0cnOjV5oBtGl57FIWrtpNI5THdrRjyS9f9O9pQV'
-access_secret = 'hSs76D1kxjepVUuXoy0WinWisUyYdXifEbqNkd7IKCJZ2'
+consumer_key = ''
+consumer_secret = ''
+access_key = ''
+access_secret = ''
 
 #tweepy authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
